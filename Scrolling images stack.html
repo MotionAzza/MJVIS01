@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3D Image Slider</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      font-family: Arial, sans-serif;
+      background: #F3F0E7;
+      color: white;
+    }
+
+    .container {
+      perspective: 1200px;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .slider {
+      position: relative;
+      width: 200px;
+      height: 300px;
+      transform-style: preserve-3d;
+      transform: rotateY(0deg);
+      transition: transform 1s ease-in-out;
+    }
+
+    .slide {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .slide:nth-child(1) { transform: rotateY(0deg) translateZ(300px); background-image: url(https://cdn.midjourney.com/28475475-165d-4c3e-9a22-9c0bd58af081/0_2.png); }
+    .slide:nth-child(2) { transform: rotateY(45deg) translateZ(300px); background-image: url(https://cdn.midjourney.com/362bfd61-9400-4732-b184-f99a0803212c/0_1.png); }
+    .slide:nth-child(3) { transform: rotateY(90deg) translateZ(300px); background-image: url(https://cdn.midjourney.com/a3491b60-dfe4-49b5-9404-bbd45985e92b/0_0.png); }
+    .slide:nth-child(4) { transform: rotateY(135deg) translateZ(300px); background-image: url(https://cdn.midjourney.com/74fe68d2-d020-4809-8c3f-be2d3323c572/0_0.png); }
+    .slide:nth-child(5) { transform: rotateY(180deg) translateZ(300px); background-image: url(https://cdn.midjourney.com/ae4f9eaf-1d68-4650-b9ee-47d36eb19b97/0_2.png); }
+    .slide:nth-child(6) { transform: rotateY(225deg) translateZ(300px); background-image: url(https://cdn.midjourney.com/57f36d0b-4451-47ba-80b0-4bc8ccc92352/0_2.png); }
+    .slide:nth-child(7) { transform: rotateY(270deg) translateZ(300px); background-image: url(https://cdn.midjourney.com/1a991ba1-7887-46ca-85a2-f0c5460aa03b/0_0.png); }
+    .slide:nth-child(8) { transform: rotateY(315deg) translateZ(300px); background-image: url(https://cdn.midjourney.com/f3b8a14f-f0d1-4370-81c5-a657880aeef9/0_3.png); }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="slider" id="slider">
+      <div class="slide"></div>
+      <div class="slide"></div>
+      <div class="slide"></div>
+      <div class="slide"></div>
+      <div class="slide"></div>
+      <div class="slide"></div>
+      <div class="slide"></div>
+      <div class="slide"></div>
+    </div>
+  </div>
+
+  <script>
+    let currentAngle = 0;
+    const slider = document.getElementById('slider');
+
+    function rotateSlider(direction) {
+      currentAngle += direction * 45;
+      slider.style.transform = `rotateY(${currentAngle}deg)`;
+    }
+
+    document.addEventListener('wheel', (event) => {
+      if (event.deltaY < 0) {
+        rotateSlider(-1); // Scroll up
+      } else {
+        rotateSlider(1); // Scroll down
+      }
+    });
+  </script>
+
+</body>
+</html>
